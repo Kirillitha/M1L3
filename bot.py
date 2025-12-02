@@ -50,5 +50,13 @@ def send_heh(message):
 def send_heh(message):
     bot.reply_to(message, f"Все функции:{password3(8)}")
 
+@bot.message_handler(func=lambda message: True)
+def echo_message(message):
+    bot.reply_to(message, message.text) 
+    
+@bot.message_handler(content_types=['new_chat_members'])
+def make_some(message):
+    bot.send_message(message.chat.id, 'I accepted a new user!')
+    bot.approve_chat_join_request(message.chat.id, message.from_user.id)    
 # Запуск бота
 bot.polling()
